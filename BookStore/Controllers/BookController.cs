@@ -1,4 +1,5 @@
 ﻿using BookStore.BookOperations.CreateBook;
+using BookStore.BookOperations.DeleteBook;
 using BookStore.BookOperations.GetBooks;
 using BookStore.BookOperations.UptadeBook;
 using BookStore.DBOperations;
@@ -28,6 +29,7 @@ namespace BookStore.Controllers
         {
             GetBooksQuery query = new GetBooksQuery(_context);
             var result = query.Handle();
+
             return Ok(result);
         }
 
@@ -39,7 +41,6 @@ namespace BookStore.Controllers
             var result = query.Handle(id);
 
             return Ok(result);
-
         }
 
         //[HttpGet]
@@ -63,10 +64,7 @@ namespace BookStore.Controllers
             {
                 return BadRequest(ex.Message);  // CreateBookModelin içinde yazmış olduğumuz exception'ımızı dönememize yarar!!
             }
-
             return Ok();
-
-
         }
 
         [HttpPut("{id}")]
@@ -83,7 +81,6 @@ namespace BookStore.Controllers
             {
                 return BadRequest(ex.Message);
             }
-
             return Ok();
             
         }
@@ -91,13 +88,8 @@ namespace BookStore.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteBook(int id)
         {
-            var book = _context.Books.SingleOrDefault(x => x.Id == id);
-
-            if (book == null)
-                return BadRequest();
-
-            _context.Books.Remove(book);
-            _context.SaveChanges();
+            DeleteBookCommand command = new DeleteBookCommand(_context);
+            command.Handle(id);
             return Ok();
         }
     }
