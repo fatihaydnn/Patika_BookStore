@@ -3,6 +3,7 @@ using BookStore.BookOperations.DeleteBook;
 using BookStore.BookOperations.GetBooks;
 using BookStore.BookOperations.UptadeBook;
 using BookStore.DBOperations;
+using BookStore.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,7 @@ namespace BookStore.Controllers
         //}
 
         [HttpPost]
-        public IActionResult AddBook([FromBody] CreateBookModel newBook)
+        public IActionResult AddBook([FromBody] CreateBookDTO newBook)
         {
             CreateBookCommand command = new CreateBookCommand(_context);
             try
@@ -68,7 +69,7 @@ namespace BookStore.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateBook(int id,[FromBody] UpdateBookModel updatedBook)
+        public IActionResult UpdateBook(int id,[FromBody] UpdateBookDTO updatedBook)
         {
             UptadeBookCommand command = new UptadeBookCommand(_context);
 

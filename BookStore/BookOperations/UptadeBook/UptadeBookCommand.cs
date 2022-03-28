@@ -1,4 +1,5 @@
 ﻿using BookStore.DBOperations;
+using BookStore.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace BookStore.BookOperations.UptadeBook
     public class UptadeBookCommand
     {
         private readonly BookStoreDbContext _dbContext;
-        public UpdateBookModel Model { get; set; }
+        public UpdateBookDTO Model { get; set; }
         public UptadeBookCommand(BookStoreDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -31,12 +32,12 @@ namespace BookStore.BookOperations.UptadeBook
             _dbContext.SaveChanges();
         }
 
-        public class UpdateBookModel
-        {
-            public string Title { get; set; }
-            public int GenreId { get; set; }
-            public int PageCount { get; set; }
-            public DateTime PublishDate { get; set; }
-        }
+        //public class UpdateBookModel
+        //{
+        //    public string Title { get; set; }
+        //    public int GenreId { get; set; }
+        //    public int PageCount { get; set; }
+        //    public DateTime PublishDate { get; set; }
+        //}
     }
 }

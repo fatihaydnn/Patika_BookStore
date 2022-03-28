@@ -1,5 +1,6 @@
 ﻿using BookStore.Common;
 using BookStore.DBOperations;
+using BookStore.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +16,13 @@ namespace BookStore.BookOperations.GetBooks
             _dbContext = dbContext;
         }
 
-        public List<BookViewModel> Handle()
+        public List<GetBooksQueryDTO> Handle()
         {
             var bookList = _dbContext.Books.OrderBy(x => x.Id).ToList<Book>();
-            List<BookViewModel> vm = new List<BookViewModel>();
+            List<GetBooksQueryDTO> vm = new List<GetBooksQueryDTO>();
             foreach (var book in bookList)
             {
-                vm.Add(new BookViewModel
+                vm.Add(new GetBooksQueryDTO
                 {
                     Title = book.Title,
                     Genre = ((GenreEnum)book.GenreId).ToString(),
@@ -35,12 +36,12 @@ namespace BookStore.BookOperations.GetBooks
     }
 
 
-    public class BookViewModel
-    {
-        public string Title { get; set; }
-        public int PageCount { get; set; }
-        public string PublishDate { get; set; }
-        public string Genre { get; set; }
-    }
+    //public class BookViewModel
+    //{
+    //    public string Title { get; set; }
+    //    public int PageCount { get; set; }
+    //    public string PublishDate { get; set; }
+    //    public string Genre { get; set; }
+    //}
 
 }

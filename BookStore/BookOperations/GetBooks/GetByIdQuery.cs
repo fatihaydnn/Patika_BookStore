@@ -1,5 +1,6 @@
 ﻿using BookStore.Common;
 using BookStore.DBOperations;
+using BookStore.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,11 @@ namespace BookStore.BookOperations.GetBooks
             _dbContext = dbContext;
         }
 
-        public GetByIdViewModel Handle(int id)
+        public GetByIdQueryDTO Handle(int id)
         {
             var book = _dbContext.Books.Where(x => x.Id == id).SingleOrDefault();
 
-            GetByIdViewModel vm = new GetByIdViewModel();
+            GetByIdQueryDTO vm = new GetByIdQueryDTO();
             vm.Title = book.Title;
             vm.PublishDate = book.PublishDate.Date.ToString("dd/MM//yyyy");
             vm.PageCount = book.PageCount;
@@ -29,12 +30,12 @@ namespace BookStore.BookOperations.GetBooks
         }
     }
 
-    public class GetByIdViewModel
-    {
-        public string Title { get; set; }
-        public int PageCount { get; set; }
-        public string PublishDate { get; set; }
-        public string Genre { get; set; }
-    }
+    //public class GetByIdViewModel
+    //{
+    //    public string Title { get; set; }
+    //    public int PageCount { get; set; }
+    //    public string PublishDate { get; set; }
+    //    public string Genre { get; set; }
+    //}
 
 }
